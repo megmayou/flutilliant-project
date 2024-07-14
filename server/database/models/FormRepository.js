@@ -15,7 +15,7 @@ const formulaireSchema = new mongoose.Schema(
       require: true,
     },
     dateVisit: {
-      type: Number,
+      type: Date,
       require: true,
     },
     comment: {
@@ -23,7 +23,7 @@ const formulaireSchema = new mongoose.Schema(
       require: true,
     },
     articlesNumber: {
-      type: Date,
+      type: Number,
       require: true,
     },
     salesFigures: {

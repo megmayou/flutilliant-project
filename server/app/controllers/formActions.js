@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 
-const Formulaires = require("../../database/models/FormRepository");
+const FormulaireModel = require("../../database/models/FormRepository");
 
 exports.create = (req, res) => {
   try {
-    const formulaire = new Formulaires({
+    const formulaire = new FormulaireModel({
       nameClient: req.body.nameClient,
       adressClient: req.body.adressClient,
       contractNumber: req.body.contractNumber,
-      dateVisit: req.body.dateVisit,
+      dateVisit: new Date(req.body.dateVisit),
       comment: req.body.comment,
       articlesNumber: req.body.articlesNumber,
       salesFigures: req.body.salesFigures,
@@ -18,10 +18,12 @@ exports.create = (req, res) => {
     });
 
     (async () => {
+      console.log(formulaire);
       await formulaire.save();
+      res.json({ message: "Formulaire enregistré avec succés" });
     })();
-    console.info("Formulaire enregistré avec succés");
   } catch (err) {
     console.error(err);
+    res.json({ message: "erreur !" });
   }
 };

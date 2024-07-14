@@ -28,11 +28,7 @@ function Formulaire() {
     e.preventDefault();
     try {
       axios
-        .post(
-          `${import.meta.env.VITE_API_URL}/formulaires`,
-
-          ...form
-        )
+        .post(`${import.meta.env.VITE_API_URL}/formulaires`, { ...form })
         .then((res) => {
           notifySuccess("Formulaire envoyé");
           setForm({
@@ -47,12 +43,14 @@ function Formulaire() {
             articlesNumberForecast: "",
             salesFiguresForecast: "",
           });
-          console.info(res);
+
+          console.log(res);
         });
     } catch (err) {
       console.error(err);
     }
   };
+  console.info(form);
 
   return (
     <section>
@@ -87,7 +85,7 @@ function Formulaire() {
               required
               name="contractNumber"
               id="contractNumber"
-              type="text"
+              type="number"
               value={form.contractNumber}
               onChange={handleFormChange}
             />
@@ -101,7 +99,7 @@ function Formulaire() {
               required
               name="dateVisit"
               id="dateVisit"
-              type="text"
+              type="date"
               value={form.dateVisit}
               onChange={handleFormChange}
             />
@@ -127,7 +125,7 @@ function Formulaire() {
               required
               name="articlesNumber"
               id="articlesNumber"
-              type="text"
+              type="number"
               value={form.articlesNumber}
               onChange={handleFormChange}
             />
@@ -140,7 +138,7 @@ function Formulaire() {
               required
               name="salesFigures"
               id="salesFigures"
-              type="text"
+              type="number"
               value={form.salesFigures}
               onChange={handleFormChange}
             />
@@ -157,7 +155,7 @@ function Formulaire() {
               required
               name="dateVisitForecast"
               id="dateVisitForecast"
-              type="text"
+              type="date"
               value={form.dateVisitForecast}
               onChange={handleFormChange}
             />
@@ -170,7 +168,7 @@ function Formulaire() {
               required
               name="articlesNumberForecast"
               id="articlesNumberForecast"
-              type="text"
+              type="number"
               value={form.articlesNumberForecast}
               onChange={handleFormChange}
             />
@@ -183,16 +181,16 @@ function Formulaire() {
               required
               name="salesFiguresForecast"
               id="salesFiguresForecast"
-              type="text"
+              type="number"
               value={form.salesFiguresForecast}
               onChange={handleFormChange}
             />
           </div>
         </article>
+        <button type="submit" className="form-submit-btn">
+          Envoyer le formulaire
+        </button>
       </form>
-      <button type="submit" className="form-submit-btn">
-        Envoyer le formulaire
-      </button>
       <ToastContainer />
     </section>
   );
