@@ -1,8 +1,9 @@
-const express = require("express");
 const cors = require("cors");
+const express = require("express");
 require("dotenv").config();
-const { MongoClient } = require("mongodb");
 
+const mainConnectionMongoDb = require("./database/connect");
+const appRoutes = require("./app/routers/FormRouters");
 /** CONFIGURATION SERVEUR */
 const app = express();
 
@@ -10,29 +11,13 @@ app.use(cors());
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.json({ message: "SALUT" });
-});
-
 /** CONNEXION A MONGO DB */
-console.log(process.env.MONGO_DB_URL_CONNECTION);
-async function mainConnectionMongoDb() {
-  const client = new MongoClient(process.env.MONGO_DB_URL_CONNECTION);
-  await client.connect();
+(async () => {
+  await mainConnectionMongoDb();
+})();
 
-  const db = client.db("projet_flutilliant");
-  await db.createCollection("formulaires");
-
-  const databaseList = await client.db().admin().listDatabases();
-
-  console.log(databaseList);
-}
-
-try {
-  mainConnectionMongoDb();
-} catch (e) {
-  console.log(e);
-}
+/** ROUTES */
+appRoutes(app);
 
 /** LANCEMENT DU SERVEUR */
 const PORT = process.env.PORT || 3000;

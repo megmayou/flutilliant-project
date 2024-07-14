@@ -1,4 +1,5 @@
 import axios from "axios";
+import "dotenv";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 
@@ -23,34 +24,34 @@ function Formulaire() {
     setForm({ ...form, [name]: value });
   };
 
-  const createContactForm = (e) => {
+  const createContactForm = async (e) => {
     e.preventDefault();
+    try {
+      axios
+        .post(
+          `${import.meta.env.VITE_API_URL}/formulaires`,
 
-    axios
-      .post(
-        `${import.meta.env.VITE_API_URL}/api/users`,
-
-        form
-      )
-      .then((res) => {
-        notifySuccess("Formulaire envoyé");
-        setForm({
-          nameClient: "",
-          adressClient: "",
-          contractNumber: "",
-          dateVisit: "",
-          comment: "",
-          articlesNumber: "",
-          salesFigures: "",
-          dateVisitForecast: "",
-          articlesNumberForecast: "",
-          salesFiguresForecast: "",
+          ...form
+        )
+        .then((res) => {
+          notifySuccess("Formulaire envoyé");
+          setForm({
+            nameClient: "",
+            adressClient: "",
+            contractNumber: "",
+            dateVisit: "",
+            comment: "",
+            articlesNumber: "",
+            salesFigures: "",
+            dateVisitForecast: "",
+            articlesNumberForecast: "",
+            salesFiguresForecast: "",
+          });
+          console.info(res);
         });
-        console.info(res);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
