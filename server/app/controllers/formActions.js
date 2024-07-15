@@ -18,9 +18,33 @@ exports.create = (req, res) => {
     });
 
     (async () => {
-      console.log(formulaire);
       await formulaire.save();
       res.json({ message: "Formulaire enregistré avec succés" });
+    })();
+  } catch (err) {
+    console.error(err);
+    res.json({ message: "erreur !" });
+  }
+};
+
+exports.findAll = (req, res) => {
+  try {
+    (async () => {
+      const allFormulaire = await FormulaireModel.find();
+      res.json(allFormulaire);
+    })();
+  } catch (err) {
+    console.error(err);
+    res.json({ message: "erreur !" });
+  }
+};
+
+exports.findOneById = (req, res) => {
+  try {
+    (async () => {
+      const formulaireById = await FormulaireModel.findById(req.params.id);
+      res.json(formulaireById);
+      console.log(req.params.id);
     })();
   } catch (err) {
     console.error(err);

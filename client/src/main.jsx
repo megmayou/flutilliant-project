@@ -3,7 +3,9 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App.jsx";
-import Formulaire from "./pages/Formulaire.jsx";
+import AllFormulaire from "./pages/AllFormulaire.jsx";
+import CreateFormulaire from "./pages/CreateFormulaire.jsx";
+import ReadFormulaire from "./pages/ReadFormulaire.jsx";
 
 import "./styles/index.css";
 
@@ -13,7 +15,16 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Formulaire />,
+        element: <CreateFormulaire />,
+      },
+
+      {
+        path: "/all-formulaires",
+        element: <AllFormulaire />,
+      },
+      {
+        path: "/read-formulaire/:id",
+        element: <ReadFormulaire />,
       },
     ],
   },

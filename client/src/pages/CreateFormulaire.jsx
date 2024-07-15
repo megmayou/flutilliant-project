@@ -50,7 +50,6 @@ function Formulaire() {
       console.error(err);
     }
   };
-  console.info(form);
 
   return (
     <section>
