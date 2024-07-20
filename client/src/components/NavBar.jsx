@@ -10,7 +10,7 @@ function NavBar() {
               <NavLink to="/">Créer un formulaire</NavLink>
             </li>
             <li>
-              <NavLink to="/all-formulaires">
+              <NavLink to="/formulaire/all">
                 Voir l&apos;ensemble des formulaires
               </NavLink>
             </li>

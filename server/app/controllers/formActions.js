@@ -44,7 +44,36 @@ exports.findOneById = (req, res) => {
     (async () => {
       const formulaireById = await FormulaireModel.findById(req.params.id);
       res.json(formulaireById);
-      console.log(req.params.id);
+    })();
+  } catch (err) {
+    console.error(err);
+    res.json({ message: "erreur !" });
+  }
+};
+
+exports.updateFormulaireById = (req, res) => {
+  try {
+    (async () => {
+      const updateFormulaireById = await FormulaireModel.updateOne({
+        ...req.body,
+      });
+
+      res.json(updateFormulaireById);
+    })();
+  } catch (err) {
+    console.error(err);
+    res.json({ message: "erreur !" });
+  }
+};
+
+exports.deleteFormulaireById = (req, res) => {
+  try {
+    (async () => {
+      const deleteFormulaireById = await FormulaireModel.deleteOne({
+        _id: req.params.id,
+      });
+
+      res.json(deleteFormulaireById);
     })();
   } catch (err) {
     console.error(err);

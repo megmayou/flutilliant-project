@@ -6,4 +6,8 @@ module.exports = (app) => {
   app.get("/formulaires", formulaire.findAll);
 
   app.get("/formulaires/:id", formulaire.findOneById);
+
+  app.put("/formulaires/:id", formulaire.updateFormulaireById);
+
+  app.delete("/formulaires/:id", formulaire.deleteFormulaireById);
 };

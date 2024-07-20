@@ -1,13 +1,11 @@
 import axios from "axios";
 import "dotenv";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import { useParams } from "react-router-dom";
-
 function ReadFormulaire() {
-  const { id } = useParams();
-
   const [readFormulaire, setReadFormulaire] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
     const findToReadFormulaire = async () => {

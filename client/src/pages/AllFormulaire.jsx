@@ -1,5 +1,6 @@
-import { NavLink } from "react-router-dom";
-import { useOutletContext } from "react-router-dom";
+import axios from "axios";
+
+import { NavLink, useOutletContext } from "react-router-dom";
 
 import { CiRead } from "react-icons/ci";
 import { FaPen } from "react-icons/fa";
@@ -8,7 +9,18 @@ import { MdDeleteForever } from "react-icons/md";
 function AllFormulaire() {
   const { allFormulaire } = useOutletContext();
 
-  console.log(allFormulaire);
+  const deleteContactForm = async (id) => {
+    try {
+      await axios
+        .delete(`${import.meta.env.VITE_API_URL}/formulaires/${id}`)
+        .then((res) => {
+          console.log(res);
+        });
+      window.location.reload();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <table>
@@ -32,16 +44,22 @@ function AllFormulaire() {
               <td>{formulaire.dateVisit}</td>
               <td>
                 <button>
-                  <NavLink to={`/read-formulaire/${formulaire._id}`}>
+                  <NavLink to={`/formulaire/${formulaire._id}/read`}>
                     <CiRead />
                   </NavLink>
                 </button>
               </td>
               <td>
-                <FaPen />
+                <NavLink to={`/formulaire/${formulaire._id}/update`}>
+                  <FaPen />
+                </NavLink>
               </td>
               <td>
-                <button>
+                <button
+                  onClick={() => {
+                    deleteContactForm(formulaire._id);
+                  }}
+                >
                   <MdDeleteForever />
                 </button>
               </td>

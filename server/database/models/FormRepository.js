@@ -16,6 +16,7 @@ const formulaireSchema = new mongoose.Schema(
     },
     dateVisit: {
       type: Date,
+      timestamps: false,
       require: true,
     },
     comment: {

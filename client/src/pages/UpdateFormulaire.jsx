@@ -1,37 +1,49 @@
 import axios from "axios";
 import "dotenv";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import { notifySuccess } from "../utils/helper";
 
-function Formulaire() {
-  const [form, setForm] = useState({
-    nameClient: "",
-    adressClient: "",
-    contractNumber: "",
-    dateVisit: "",
-    comment: "",
-    articlesNumber: "",
-    salesFigures: "",
-    dateVisitForecast: "",
-    articlesNumberForecast: "",
-    salesFiguresForecast: "",
-  });
+function UpdateFormulaire() {
+  const [updateForm, setUpdateForm] = useState(null);
+  const { id } = useParams();
+
+  useEffect(() => {
+    const findToReadFormulaire = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/formulaires/${id}`
+        );
+        setUpdateForm(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    findToReadFormulaire();
+  }, []);
+
+  if (!updateForm) {
+    return <p>pas de formulaire !</p>;
+  }
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
-    setForm({ ...form, [name]: value });
+    setUpdateForm({ ...updateForm, [name]: value });
   };
 
-  const createContactForm = async (e) => {
+  const updateContactForm = async (e) => {
     e.preventDefault();
     try {
       axios
-        .post(`${import.meta.env.VITE_API_URL}/formulaires`, { ...form })
+        .put(`${import.meta.env.VITE_API_URL}/formulaires/${updateForm._id}`, {
+          ...updateForm,
+        })
         .then((res) => {
           notifySuccess("Formulaire envoyé");
-          setForm({
+          setUpdateForm({
             nameClient: "",
             adressClient: "",
             contractNumber: "",
@@ -53,7 +65,7 @@ function Formulaire() {
 
   return (
     <section>
-      <form onSubmit={createContactForm}>
+      <form onSubmit={updateContactForm}>
         <article>
           <h2>Informations Client</h2>
           <div className="">
@@ -63,7 +75,7 @@ function Formulaire() {
               name="nameClient"
               id="nameClient"
               type="text"
-              value={form.nameClient}
+              value={updateForm.nameClient}
               onChange={handleFormChange}
             />
           </div>
@@ -74,7 +86,7 @@ function Formulaire() {
               name="adressClient"
               id="adressClient"
               type="text"
-              value={form.adressClient}
+              value={updateForm.adressClient}
               onChange={handleFormChange}
             />
           </div>
@@ -85,25 +97,15 @@ function Formulaire() {
               name="contractNumber"
               id="contractNumber"
               type="number"
-              value={form.contractNumber}
+              value={updateForm.contractNumber}
               onChange={handleFormChange}
             />
           </div>
         </article>
         <article>
           <h2>Rendez vous client</h2>
-          <div className="">
-            <label htmlFor="dateVisit">Date de visite</label>
-            <input
-              required
-              name="dateVisit"
-              id="dateVisit"
-              type="date"
-              pattern="\d{4}-\d{2}-\d{2}"
-              value={form.dateVisit}
-              onChange={handleFormChange}
-            />
-          </div>
+          <h3>Date de visite </h3>
+          <p>{updateForm.dateVisit}</p>
           <div>
             <legend>Commentaire</legend>
             <label>
@@ -112,7 +114,7 @@ function Formulaire() {
                 name="comment"
                 id="comment"
                 type="text"
-                value={form.comment}
+                value={updateForm.comment}
                 onChange={handleFormChange}
               ></textarea>
             </label>
@@ -126,7 +128,7 @@ function Formulaire() {
               name="articlesNumber"
               id="articlesNumber"
               type="number"
-              value={form.articlesNumber}
+              value={updateForm.articlesNumber}
               onChange={handleFormChange}
             />
           </div>
@@ -139,7 +141,7 @@ function Formulaire() {
               name="salesFigures"
               id="salesFigures"
               type="number"
-              value={form.salesFigures}
+              value={updateForm.salesFigures}
               onChange={handleFormChange}
             />
           </div>
@@ -157,7 +159,7 @@ function Formulaire() {
               id="dateVisitForecast"
               type="date"
               pattern="\d{4}-\d{2}-\d{2}"
-              value={form.dateVisitForecast}
+              value={updateForm.dateVisitForecast}
               onChange={handleFormChange}
             />
           </div>
@@ -170,7 +172,7 @@ function Formulaire() {
               name="articlesNumberForecast"
               id="articlesNumberForecast"
               type="number"
-              value={form.articlesNumberForecast}
+              value={updateForm.articlesNumberForecast}
               onChange={handleFormChange}
             />
           </div>
@@ -183,13 +185,13 @@ function Formulaire() {
               name="salesFiguresForecast"
               id="salesFiguresForecast"
               type="number"
-              value={form.salesFiguresForecast}
+              value={updateForm.salesFiguresForecast}
               onChange={handleFormChange}
             />
           </div>
         </article>
         <button type="submit" className="form-submit-btn">
-          Envoyer le formulaire
+          Modifier
         </button>
       </form>
       <ToastContainer />
@@ -197,4 +199,4 @@ function Formulaire() {
   );
 }
 
-export default Formulaire;
+export default UpdateFormulaire;

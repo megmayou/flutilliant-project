@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import AllFormulaire from "./pages/AllFormulaire.jsx";
 import CreateFormulaire from "./pages/CreateFormulaire.jsx";
 import ReadFormulaire from "./pages/ReadFormulaire.jsx";
+import UpdateFormulaire from "./pages/UpdateFormulaire.jsx";
 
 import "./styles/index.css";
 
@@ -19,12 +20,16 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/all-formulaires",
+        path: "/formulaire/all",
         element: <AllFormulaire />,
       },
       {
-        path: "/read-formulaire/:id",
+        path: "/formulaire/:id/read",
         element: <ReadFormulaire />,
+      },
+      {
+        path: "/formulaire/:id/update",
+        element: <UpdateFormulaire />,
       },
     ],
   },
