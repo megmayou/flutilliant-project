@@ -41,7 +41,7 @@ function AllFormulaire() {
             <tr key={formulaire._id}>
               <td>{formulaire.nameClient}</td>
               <td>{formulaire.contractNumber}</td>
-              <td>{formulaire.dateVisit}</td>
+              <td>{new Date(formulaire.dateVisit).toLocaleDateString()}</td>
               <td>
                 <button>
                   <NavLink to={`/formulaire/${formulaire._id}/read`}>

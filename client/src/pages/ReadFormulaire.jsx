@@ -45,7 +45,7 @@ function ReadFormulaire() {
         <h2>Rendez vous client</h2>
 
         <h3>Date de visite </h3>
-        <p>{readFormulaire.dateVisit}</p>
+        <p>{new Date(readFormulaire.dateVisit).toLocaleDateString()}</p>
 
         <h3>Commentaire</h3>
         <p>{readFormulaire.comment}</p>
@@ -61,7 +61,7 @@ function ReadFormulaire() {
         <h2>Prochain rendez vous</h2>
 
         <h3>Date de visite prévisionnelle</h3>
-        <p>{readFormulaire.dateVisitForecast}</p>
+        <p>{new Date(readFormulaire.dateVisitForecast).toLocaleDateString()}</p>
 
         <h3>Nombres d&apos;articles prévisionnels</h3>
         <p>{readFormulaire.articlesNumberForecast}</p>

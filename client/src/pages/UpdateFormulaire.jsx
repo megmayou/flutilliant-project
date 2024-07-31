@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 import "dotenv";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -62,6 +63,7 @@ function UpdateFormulaire() {
       console.error(err);
     }
   };
+  console.log(moment(updateForm.dateVisitForecast).format("yyyy-MM-DD"));
 
   return (
     <section>
@@ -105,7 +107,7 @@ function UpdateFormulaire() {
         <article>
           <h2>Rendez vous client</h2>
           <h3>Date de visite </h3>
-          <p>{updateForm.dateVisit}</p>
+          <p>{new Date(updateForm.dateVisit).toLocaleDateString()}</p>
           <div>
             <legend>Commentaire</legend>
             <label>
@@ -158,8 +160,7 @@ function UpdateFormulaire() {
               name="dateVisitForecast"
               id="dateVisitForecast"
               type="date"
-              pattern="\d{4}-\d{2}-\d{2}"
-              value={updateForm.dateVisitForecast}
+              value={moment(updateForm.dateVisitForecast).format("yyyy-MM-DD")}
               onChange={handleFormChange}
             />
           </div>
