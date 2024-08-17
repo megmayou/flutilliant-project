@@ -63,7 +63,6 @@ function UpdateFormulaire() {
       console.error(err);
     }
   };
-  console.log(moment(updateForm.dateVisitForecast).format("yyyy-MM-DD"));
 
   return (
     <section>

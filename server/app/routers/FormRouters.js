@@ -1,13 +1,18 @@
-const formulaire = require("../controllers/formActions");
+const express = require("express");
+const router = express.Router();
 
-module.exports = (app) => {
-  app.post("/formulaires", formulaire.create);
+const {
+  create,
+  findAll,
+  findOneById,
+  updateFormulaireById,
+  deleteFormulaireById,
+} = require("../controllers/formActions");
 
-  app.get("/formulaires", formulaire.findAll);
+router.post("/", create);
+router.get("/:id", findAll);
+router.get("/", findOneById);
+router.put("/", updateFormulaireById);
+router.delete("/:id", deleteFormulaireById);
 
-  app.get("/formulaires/:id", formulaire.findOneById);
-
-  app.put("/formulaires/:id", formulaire.updateFormulaireById);
-
-  app.delete("/formulaires/:id", formulaire.deleteFormulaireById);
-};
+module.exports = router;

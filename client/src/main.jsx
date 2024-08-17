@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import AllFormulaire from "./pages/AllFormulaire.jsx";
 import CreateFormulaire from "./pages/CreateFormulaire.jsx";
+import CreateUsers from "./pages/CreateUsers.jsx";
 import ReadFormulaire from "./pages/ReadFormulaire.jsx";
 import UpdateFormulaire from "./pages/UpdateFormulaire.jsx";
 
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <CreateFormulaire />,
+      },
+      {
+        path: "/inscription",
+        element: <CreateUsers />,
       },
 
       {

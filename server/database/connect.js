@@ -1,13 +1,15 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-const createDatabaseAndTable = require("./models/FormRepository");
+const createSchemaForms = require("./models/FormRepository");
+const createSchemaUsers = require("./models/UsersRepository");
 
 async function instanceConnectionDatabase() {
   await mongoose.connect(process.env.MONGO_DB_URL_CONNECTION);
 
-  const Formulaire = createDatabaseAndTable();
+  const Formulaire = createSchemaForms();
+  const Users = createSchemaUsers();
 
-  return Formulaire;
+  return Formulaire, Users;
 }
 
 module.exports = instanceConnectionDatabase;

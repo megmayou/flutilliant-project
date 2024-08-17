@@ -1,5 +1,3 @@
-const mongoose = require("mongoose");
-
 const FormulaireModel = require("../../database/models/FormRepository");
 
 exports.create = (req, res) => {

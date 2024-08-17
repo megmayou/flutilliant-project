@@ -28,7 +28,7 @@ function Formulaire() {
     e.preventDefault();
     try {
       axios
-        .post(`${import.meta.env.VITE_API_URL}/formulaires`, { ...form })
+        .post(`${import.meta.env.VITE_API_URL}/api/formulaires`, { ...form })
         .then((res) => {
           notifySuccess("Formulaire envoyé");
           setForm({
