@@ -1,26 +1,51 @@
-const argon2 = require("argon2");
+const argon2d = require("argon2");
+const jwt = require("jsonwebtoken");
+const cookie = require("cookie");
+
 const AuthModel = require("../../database/models/UsersRepository");
 
-exports.create = async (req, res) => {
-  const { userName, userLastName, userEmail, userPassword, userRoles } =
-    req.body;
-  const hashedPassword = await argon2.hash(userPassword);
-
+exports.login = async (req, res) => {
   try {
-    const user = new AuthModel({
-      userName: userName,
-      userLastName: userLastName,
-      userEmail: userEmail,
-      userPassword: hashedPassword,
-      userRoles: userRoles,
+    const findUserAccount = await AuthModel.findOne({
+      userEmail: req.body.userEmail,
     });
 
-    (async () => {
-      await user.save();
-      res.json({ message: "Utilisateur enregistré avec succés" });
-    })();
+    if (findUserAccount == null) {
+      res.sendStatus(422);
+      return;
+    }
+
+    const verified = await argon2d.verify(
+      findUserAccount.userPassword,
+      req.body.userPassword
+    );
+    if (verified) {
+      delete AuthModel.userPassword;
+      const token = await jwt.sign(
+        { sub: AuthModel._id },
+        process.env.APP_SECRET,
+        {
+          expiresIn: "12000",
+        }
+      );
+
+      res.setHeader(
+        "Set-Cookie",
+        cookie.serialize("jwt", token, {
+          httpOnly: true,
+          maxAge: 60 * 60 * 24 * 7, // 1 week
+        })
+      );
+
+      res.json({
+        token,
+        findUserAccount,
+      });
+    } else {
+      res.sendStatus(422);
+    }
   } catch (err) {
     console.error(err);
-    res.json({ message: "erreur lors de l'enregistrement de l'utilisateur !" });
+    res.json({ message: "Authentification impossible" });
   }
 };

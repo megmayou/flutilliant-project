@@ -63,7 +63,6 @@ function Formulaire() {
               name="nameClient"
               id="nameClient"
               type="text"
-              value={form.nameClient}
               onChange={handleFormChange}
             />
           </div>
@@ -74,7 +73,6 @@ function Formulaire() {
               name="adressClient"
               id="adressClient"
               type="text"
-              value={form.adressClient}
               onChange={handleFormChange}
             />
           </div>
@@ -85,7 +83,6 @@ function Formulaire() {
               name="contractNumber"
               id="contractNumber"
               type="number"
-              value={form.contractNumber}
               onChange={handleFormChange}
             />
           </div>
@@ -100,7 +97,6 @@ function Formulaire() {
               id="dateVisit"
               type="date"
               pattern="\d{4}-\d{2}-\d{2}"
-              value={form.dateVisit}
               onChange={handleFormChange}
             />
           </div>
@@ -112,7 +108,6 @@ function Formulaire() {
                 name="comment"
                 id="comment"
                 type="text"
-                value={form.comment}
                 onChange={handleFormChange}
               ></textarea>
             </label>
@@ -126,7 +121,6 @@ function Formulaire() {
               name="articlesNumber"
               id="articlesNumber"
               type="number"
-              value={form.articlesNumber}
               onChange={handleFormChange}
             />
           </div>
@@ -139,7 +133,6 @@ function Formulaire() {
               name="salesFigures"
               id="salesFigures"
               type="number"
-              value={form.salesFigures}
               onChange={handleFormChange}
             />
           </div>
@@ -157,7 +150,6 @@ function Formulaire() {
               id="dateVisitForecast"
               type="date"
               pattern="\d{4}-\d{2}-\d{2}"
-              value={form.dateVisitForecast}
               onChange={handleFormChange}
             />
           </div>
@@ -170,7 +162,6 @@ function Formulaire() {
               name="articlesNumberForecast"
               id="articlesNumberForecast"
               type="number"
-              value={form.articlesNumberForecast}
               onChange={handleFormChange}
             />
           </div>
@@ -183,7 +174,6 @@ function Formulaire() {
               name="salesFiguresForecast"
               id="salesFiguresForecast"
               type="number"
-              value={form.salesFiguresForecast}
               onChange={handleFormChange}
             />
           </div>

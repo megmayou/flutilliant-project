@@ -5,9 +5,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import AllFormulaire from "./pages/AllFormulaire.jsx";
 import CreateFormulaire from "./pages/CreateFormulaire.jsx";
-import CreateUsers from "./pages/CreateUsers.jsx";
-import ReadFormulaire from "./pages/ReadFormulaire.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
 import UpdateFormulaire from "./pages/UpdateFormulaire.jsx";
+import ReadFormulaire from "./pages/ReadFormulaire.jsx";
+import RegisterUsers from "./pages/RegisterUsers.jsx";
 
 import "./styles/index.css";
 
@@ -21,9 +22,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/inscription",
-        element: <CreateUsers />,
+        element: <RegisterUsers />,
       },
-
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
       {
         path: "/formulaire/all",
         element: <AllFormulaire />,

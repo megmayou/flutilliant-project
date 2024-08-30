@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 
 import { notifySuccess, notifyError } from "../utils/helper";
 
-function CreateUsers() {
+function RegisterUsers() {
   const [user, setUser] = useState({
     userName: "",
     userLastName: "",
@@ -17,6 +17,7 @@ function CreateUsers() {
 
   const handleUsersChange = (event) => {
     const { name, value } = event.target;
+
     setUser({ ...user, [name]: value });
   };
 
@@ -31,7 +32,9 @@ function CreateUsers() {
     ) {
       if (user.userPassword === user.confirmPassword) {
         axios
-          .post(`${import.meta.env.VITE_API_URL}/api/users`, { ...user })
+          .post(`${import.meta.env.VITE_API_URL}/api/users/register`, {
+            ...user,
+          })
           .then((res) => {
             notifySuccess();
             setUser({
@@ -40,7 +43,6 @@ function CreateUsers() {
               userEmail: "",
               userPassword: "",
               confirmPassword: "",
-              userRoles: 2,
             });
             console.info(res);
           })
@@ -68,7 +70,6 @@ function CreateUsers() {
               name="userName"
               id="userName"
               type="text"
-              value={user.userName}
               onChange={handleUsersChange}
             />
           </div>
@@ -79,7 +80,6 @@ function CreateUsers() {
               name="userLastName"
               id="userLastName"
               type="text"
-              value={user.userLastName}
               onChange={handleUsersChange}
             />
           </div>
@@ -90,7 +90,6 @@ function CreateUsers() {
               name="userEmail"
               id="userEmail"
               type="email"
-              value={user.userEmail}
               onChange={handleUsersChange}
             />
           </div>
@@ -101,7 +100,6 @@ function CreateUsers() {
               name="userPassword"
               id="userPassword"
               type="password"
-              value={user.userPassword}
               onChange={handleUsersChange}
             />
           </div>
@@ -112,13 +110,12 @@ function CreateUsers() {
               name="confirmPassword"
               id="confirmPassword"
               type="password"
-              value={user.confirmPassword}
               onChange={handleUsersChange}
             />
           </div>
         </article>
         <button type="submit" className="user-submit-btn">
-          Envoyer le formulaire
+          Valider mes informations
         </button>
       </form>
       <ToastContainer />
@@ -126,4 +123,4 @@ function CreateUsers() {
   );
 }
 
-export default CreateUsers;
+export default RegisterUsers;

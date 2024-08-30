@@ -10,6 +10,9 @@ function NavBar() {
               <NavLink to="/inscription">Inscription</NavLink>
             </li>
             <li>
+              <NavLink to="/login">Se Connecter</NavLink>
+            </li>
+            <li>
               <NavLink to="/">Créer un formulaire</NavLink>
             </li>
             <li>
